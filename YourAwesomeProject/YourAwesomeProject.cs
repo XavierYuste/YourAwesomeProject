@@ -7,8 +7,14 @@ using System.Text.RegularExpressions;
 
 namespace YourAwesomeProject
 {
+    /// <summary>
+    /// The main thread program.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Initializes the main functionality of the code.
+        /// </summary>
         static void Main(string[] args)
         {
             DirectoryDirector directory = new DirectoryDirector();
@@ -18,7 +24,9 @@ namespace YourAwesomeProject
     }
 
 
-
+    /// <summary>
+    /// Has the main funcionalities of the DirectoryAccess.
+    /// </summary>
     class DirectoryAccess
     {
         private string path;
@@ -35,7 +43,9 @@ namespace YourAwesomeProject
             set { wordToFind = value; }
         }
 
-
+        /// <summary>
+        /// Initializes the first given path.
+        /// </summary>
         public void SetInitialPath()
         {
             Console.WriteLine("Write the path: ");
@@ -57,14 +67,18 @@ namespace YourAwesomeProject
             }
         }
 
-
+        /// <summary>
+        /// Initializes the word.
+        /// </summary>
         public void SetInitialWord()
         {
             Console.WriteLine("search> ");
             WordToFind = Console.ReadLine();
         }
 
-
+        /// <summary>
+        /// Gets all the directory paths.
+        /// </summary>
         public void GetAllDirectoryPaths()
         {
             bool isValid = false;
@@ -83,7 +97,9 @@ namespace YourAwesomeProject
             }
         }
 
-
+        /// <summary>
+        /// Counts the words in the given files.
+        /// </summary>
         public void ReadAllLinesInFile()
         {
             int noMatches = 0;
@@ -131,6 +147,9 @@ namespace YourAwesomeProject
 
     class DirectoryDirector
     {
+        /// <summary>
+        /// Builds the builder.
+        /// </summary>
         public void Construct(Builder builder)
         {
             builder.BuildPath();
@@ -141,7 +160,9 @@ namespace YourAwesomeProject
     
     }
 
-
+    /// <summary>
+    /// Abstract Builder class to have the DirectoryAccess.
+    /// </summary>
     abstract class Builder
     {
         public abstract void BuildPath();
@@ -156,6 +177,9 @@ namespace YourAwesomeProject
 
     }
 
+    /// <summary>
+    /// Builds the constructor of the DirectoryAccess.
+    /// </summary>
     class BuilderDirectoryAccess : Builder
     {
         private DirectoryAccess _directory = new DirectoryAccess();
