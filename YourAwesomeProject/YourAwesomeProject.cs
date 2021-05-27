@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-
 namespace YourAwesomeProject
 {
     /// <summary>
@@ -43,9 +42,10 @@ namespace YourAwesomeProject
             set { wordToFind = value; }
         }
 
-        public string GetPathFile()
+        public string[] FilePaths
         {
-            return path;
+            get { return filePaths; }
+            set { filePaths = value; }
         }
 
         /// <summary>
@@ -144,12 +144,9 @@ namespace YourAwesomeProject
 
             foreach (string filePath in filePaths)
             {
-                string[] lines = File.ReadAllLines(filePath);
-
                 int count = File.ReadLines(filePath)
 .Select(line => Regex.Matches(line, wordToFind).Count)
 .Sum();
-
                 if (count > 0)
                 {
                     fileCounter.Add(Path.GetFileName(filePath), count);
@@ -166,13 +163,11 @@ namespace YourAwesomeProject
             }
             else
             {
-                var sortedDict = from entry in fileCounter orderby entry.Value descending select entry;
+                var sortedDict = (from entry in fileCounter orderby entry.Value descending select entry).Take(10);
 
-                int processed = 0;
                 foreach (var item in sortedDict)
                 {
                     Console.WriteLine(item.Key + " : " + item.Value + " occurrences");
-                    if (++processed == 9) break;
                 }
             }
 
