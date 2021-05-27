@@ -10,7 +10,7 @@ namespace YourAwesomeProject
     /// <summary>
     /// The main thread program.
     /// </summary>
-    class Program
+    public class Program
     {
         /// <summary>
         /// Initializes the main functionality of the code.
@@ -27,7 +27,7 @@ namespace YourAwesomeProject
     /// <summary>
     /// Has the main funcionalities of the DirectoryAccess.
     /// </summary>
-    class DirectoryAccess
+    public class DirectoryAccess
     {
         private string path;
         private string[] filePaths;
@@ -41,6 +41,11 @@ namespace YourAwesomeProject
         {
             get { return wordToFind; }
             set { wordToFind = value; }
+        }
+
+        public string GetPathFile()
+        {
+            return path;
         }
 
         /// <summary>
@@ -67,6 +72,30 @@ namespace YourAwesomeProject
             }
         }
 
+
+        /// <summary>
+        /// Initializes the first given path by parameter.
+        /// </summary>
+        public void SetInitialPath(string pathInitial)
+        {
+            bool isValid = false;
+            while (!isValid)
+            {
+                try
+                {
+                    path = pathInitial;
+                    Console.WriteLine("Llego: " + path);
+                    filePaths = Directory.GetFiles(pathInitial);
+                    isValid = true;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Given path is not valid, please enter a valid path: ");
+                    pathInitial = Console.ReadLine();
+                }
+            }
+        }
+
         /// <summary>
         /// Initializes the word.
         /// </summary>
@@ -74,6 +103,14 @@ namespace YourAwesomeProject
         {
             Console.WriteLine("search> ");
             WordToFind = Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Initializes the word by parameter.
+        /// </summary>
+        public void SetInitialWord(string word)
+        {
+            WordToFind = word;
         }
 
         /// <summary>
@@ -145,7 +182,7 @@ namespace YourAwesomeProject
 
     }
 
-    class DirectoryDirector
+    public class DirectoryDirector
     {
         /// <summary>
         /// Builds the builder.
@@ -163,7 +200,7 @@ namespace YourAwesomeProject
     /// <summary>
     /// Abstract Builder class to have the DirectoryAccess.
     /// </summary>
-    abstract class Builder
+    public abstract class Builder
     {
         public abstract void BuildPath();
 
@@ -180,7 +217,7 @@ namespace YourAwesomeProject
     /// <summary>
     /// Builds the constructor of the DirectoryAccess.
     /// </summary>
-    class BuilderDirectoryAccess : Builder
+    public class BuilderDirectoryAccess : Builder
     {
         private DirectoryAccess _directory = new DirectoryAccess();
 
